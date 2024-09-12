@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 dotenv.config();
-app.use(cors({ origin: "https://medicalrecd.netlify.app/" }));
+app.use(cors({ origin: "https://medicalrecd.netlify.app" }));
 
 app.use("/api/seed", seedRouter);
 app.use("/api/patients", patientRouter);
