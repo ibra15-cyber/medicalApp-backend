@@ -27,7 +27,7 @@ app.use("/api/patients", patientRouter);
 //   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 // });
 
-const port = 4000;
+const port = process.env.PORT || 4000; // Default to 4000 in local dev
 app.listen(port);
 
 mongoose
