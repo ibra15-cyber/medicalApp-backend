@@ -10,7 +10,10 @@ const app = express();
 app.use(express.json());
 
 dotenv.config();
-app.use(cors({ origin: "https://medicalrecd.netlify.app" }));
+
+const frontendUrl =
+  "https://medicalrecd.netlify.app" || "http://localhost:5173";
+app.use(cors({ origin: frontendUrl }));
 
 app.use("/api/seed", seedRouter);
 app.use("/api/patients", patientRouter);
@@ -30,11 +33,10 @@ app.use("/api/patients", patientRouter);
 const port = process.env.PORT || 4000; // Default to 4000 in local dev
 app.listen(port);
 
+const dbUrl = process.env.MONGODB_URI_LOCAL || process.env.MONGODB_URI;
 mongoose
-  .connect(process.env.MONGODB_URI_LOCAL)
-  .then(() =>
-    console.log(`connection established to ${process.env.MONGODB_URI_LOCAL}`)
-  )
+  .connect(dbUrl)
+  .then(() => console.log(`connection established to ${dbUrl}`))
   .catch((err) => {
     console.log(err.message);
   });
